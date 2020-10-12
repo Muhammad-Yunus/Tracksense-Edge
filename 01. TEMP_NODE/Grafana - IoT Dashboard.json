@@ -239,7 +239,7 @@
       "nullText": null,
       "pluginVersion": "6.1.6",
       "postfix": " message ",
-      "postfixFontSize": "50%",
+      "postfixFontSize": "30%",
       "prefix": "",
       "prefixFontSize": "50%",
       "rangeMaps": [
@@ -342,7 +342,7 @@
       "nullText": null,
       "pluginVersion": "6.1.6",
       "postfix": " message ",
-      "postfixFontSize": "50%",
+      "postfixFontSize": "30%",
       "prefix": "",
       "prefixFontSize": "50%",
       "rangeMaps": [
@@ -407,9 +407,9 @@
       "colorBackground": true,
       "colorValue": false,
       "colors": [
-        "#73BF69",
-        "#73BF69",
-        "#d44a3a"
+        "#d44a3a",
+        "#d44a3a",
+        "#73BF69"
       ],
       "decimals": 0,
       "format": "none",
@@ -461,14 +461,14 @@
         "lineColor": "rgb(31, 120, 193)",
         "show": false
       },
-      "tableColumn": "label",
+      "tableColumn": "ISACTIVE",
       "targets": [
         {
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  IF(ISACTIVE, \"ACTIVE\", \"IDLE\") as 'label',\n  ISACTIVE\nFROM BROKER_STATUS",
+          "rawSql": "SELECT\n  ISACTIVE\nFROM BROKER_STATUS",
           "refId": "A",
           "select": [
             [
@@ -490,7 +490,7 @@
           ]
         }
       ],
-      "thresholds": "0.5, 1.5",
+      "thresholds": "0.5, 0.9",
       "timeFrom": null,
       "timeShift": null,
       "title": "BROKER STATUS",
@@ -499,8 +499,13 @@
       "valueMaps": [
         {
           "op": "=",
-          "text": "N/A",
-          "value": "null"
+          "text": "ACTIVE",
+          "value": "1"
+        },
+        {
+          "op": "=",
+          "text": "IDLE",
+          "value": "0"
         }
       ],
       "valueName": "avg"
@@ -571,7 +576,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  TIMESTAMP*1000\nFROM BROKER_STATUS\nORDER BY timestamp DESC",
+          "rawSql": "SELECT\n  TIMESTAMP*1000\nFROM BROKER_STATUS\nWHERE ISACTIVE\nORDER BY timestamp DESC",
           "refId": "A",
           "select": [
             [
@@ -754,7 +759,7 @@
       "nullText": null,
       "pluginVersion": "6.1.6",
       "postfix": " message ",
-      "postfixFontSize": "50%",
+      "postfixFontSize": "30%",
       "prefix": "",
       "prefixFontSize": "50%",
       "rangeMaps": [
@@ -922,9 +927,9 @@
       "colorBackground": true,
       "colorValue": false,
       "colors": [
-        "#73BF69",
-        "#73BF69",
-        "#d44a3a"
+        "#d44a3a",
+        "#d44a3a",
+        "#73BF69"
       ],
       "decimals": 0,
       "format": "none",
@@ -976,14 +981,14 @@
         "lineColor": "rgb(31, 120, 193)",
         "show": false
       },
-      "tableColumn": "label",
+      "tableColumn": "ISACTIVE",
       "targets": [
         {
           "format": "table",
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  IF(ISACTIVE, \"ACTIVE\", \"IDLE\") as 'label',\n  ISACTIVE\nFROM DEVICE_STATUS",
+          "rawSql": "SELECT\n  PINGTIME/1000 < 10 as ISACTIVE\nFROM DEVICE_STATUS\nORDER BY TIMESTAMP DESC",
           "refId": "A",
           "select": [
             [
@@ -1005,7 +1010,7 @@
           ]
         }
       ],
-      "thresholds": "0.5, 1.5",
+      "thresholds": "0.5, 0.9",
       "timeFrom": null,
       "timeShift": null,
       "title": "DEVICE STATUS",
@@ -1014,8 +1019,13 @@
       "valueMaps": [
         {
           "op": "=",
-          "text": "N/A",
-          "value": "null"
+          "text": "ACTIVE",
+          "value": "1"
+        },
+        {
+          "op": "=",
+          "text": "IDLE",
+          "value": "0"
         }
       ],
       "valueName": "avg"
@@ -1086,7 +1096,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  TIMESTAMP*1000\nFROM DEVICE_STATUS\nORDER BY timestamp DESC",
+          "rawSql": "SELECT\n  TIMESTAMP*1000\nFROM DEVICE_STATUS\nWHERE PINGTIME/1000 < 10\nORDER BY timestamp DESC",
           "refId": "A",
           "select": [
             [
@@ -1128,7 +1138,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "decimals": 1,
+      "decimals": 2,
       "fill": 1,
       "gridPos": {
         "h": 8,
@@ -1165,7 +1175,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  TIMESTAMP AS \"time\",\n  VALUE\nFROM DATA\nWHERE\n  $__unixEpochFilter(TIMESTAMP)\nORDER BY TIMESTAMP",
+          "rawSql": "SELECT\n  TIMESTAMP AS \"time\",\n  VALUE\nFROM DATA\nORDER BY TIMESTAMP",
           "refId": "A",
           "select": [
             [
@@ -1209,16 +1219,16 @@
       },
       "yaxes": [
         {
-          "decimals": 1,
+          "decimals": 2,
           "format": "short",
           "label": "°C",
           "logBase": 1,
-          "max": "28",
-          "min": "25",
+          "max": "33",
+          "min": "24",
           "show": true
         },
         {
-          "decimals": 1,
+          "decimals": 2,
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1272,7 +1282,7 @@
           "group": [],
           "metricColumn": "none",
           "rawQuery": true,
-          "rawSql": "SELECT\n  TIMESTAMP AS \"time\",\n  PINGTIME/1000\nFROM DEVICE_STATUS\nWHERE\n  $__unixEpochFilter(TIMESTAMP)\nORDER BY TIMESTAMP",
+          "rawSql": "SELECT\n  TIMESTAMP AS \"time\",\n  PINGTIME/1000\nFROM DEVICE_STATUS\nORDER BY TIMESTAMP",
           "refId": "A",
           "select": [
             [
@@ -1317,7 +1327,7 @@
       "yaxes": [
         {
           "format": "short",
-          "label": "ms",
+          "label": "s",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -1454,7 +1464,7 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -1485,5 +1495,5 @@
   "timezone": "",
   "title": "Temperature Dashboard",
   "uid": "3s8yAviZk",
-  "version": 17
+  "version": 34
 }
