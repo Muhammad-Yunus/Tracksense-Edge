@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.27, for Linux (aarch64)
+-- MySQL dump 10.13  Distrib 5.7.31, for Linux (aarch64)
 --
 -- Host: localhost    Database: IOT
 -- ------------------------------------------------------
--- Server version	5.7.27-0ubuntu0.18.04.1
+-- Server version	5.7.31-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -57,33 +57,7 @@ CREATE TABLE `DEVICE_STATUS` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Table structure for table `NODE_FPIK`
---
 
-DROP TABLE IF EXISTS `NODE_FPIK`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `NODE_FPIK` (
-  `TIMESTAMP` bigint(20) DEFAULT NULL,
-  `VALUE` float DEFAULT NULL,
-  `NODE_NAME` varchar(32) DEFAULT NULL,
-  `SENSOR_NAME` varchar(32) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `SENSOR_FPIK`
---
-
-DROP TABLE IF EXISTS `SENSOR_FPIK`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `SENSOR_FPIK` (
-  `SENSOR_NAME` varchar(32) DEFAULT NULL,
-  `SENSORID` varchar(32) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -94,4 +68,4 @@ CREATE TABLE `SENSOR_FPIK` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-15  3:24:32
+-- Dump completed on 2021-11-13 12:32:14
